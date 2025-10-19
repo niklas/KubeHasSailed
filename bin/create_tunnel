@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+echo "Creating tunnel..."
+
+helm install cloudflared ./cloudflared --values=config/cloudflared.yaml "$@"
