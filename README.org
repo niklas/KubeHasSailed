@@ -145,3 +145,15 @@ they can be reused with other meta-kubernetes tools, for example helm.
 *** Problems
 **** TODO settings are visible, hardcoded into the resource descriptions
 **** TODO these settings might be actually secret (passwords, API keys etc)
+
+
+** Future
+
+*** TODO restore ability to manage services
+- [ ] transform the huge all.yaml into helm charts
+- [ ] group by metadata.labels.app -> charts/
+- [ ] extract envs into values.yaml, secrets
+- [ ] helm install/uninstall should work with these values
+- [ ] extract service ports to create CFZT tunnel routes
+- [ ] leverage git to save user setup?
+- [ ] update with rebase?
