@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eu
+
+./bin/kubectl logs -n default --all-pods=true -f deployments/cloudflared "$@"

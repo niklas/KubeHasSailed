@@ -97,7 +97,7 @@ We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloud
 - write that token down
 - edit config/cloudflared.yaml and paste the the token from above, save it
 - in one terminal run: ./bin/ssh_pibox (this will forward the kubernetes admin connection)
-- in another terminal run: ./bin/create_tunnel
+- in another terminal run: ./bin/tunnel_create
 
 **** Routes setup per service
 
