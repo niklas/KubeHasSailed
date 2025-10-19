@@ -19,6 +19,8 @@ In order to follow this guide, it is assumed you know about the following stuff:
 In order to use code in this repo, you might have to install packages either locally or on your pibox.
 
 - SSH access to your pibox
+- a linux/unix system (sorry, Niklas has no clue about Windows, maybe later)
+- installed: bash, kubectl, helm
 
 *** Conventions
 
@@ -28,6 +30,39 @@ In this guide, we will use the following conventions to make it easier to read a
 - There is one cluster named "boxxy"
 - There is a service on this cluster named "hemlo"
 
+** Setup access to your pibox
+
+For all of this, you will need access to the inner workings of your pibox. We will accomplish this with ssh:
+
+Open a terminal with your shell of choice (assuming bash here, don't @ me).
+
+Type:
+#+begin_src bash
+  ssh pibox.local hostname
+#+end_src
+
+This should return almost immediately and say something like "pibox". There
+might be some warnings about post-quantum key exchange - we can ignore this for
+now.
+
+If the above command asks for a password, please setup key authentication for
+your ssh connection.
+
+If you get a "Could not resolve hostname" or similar, you have been using
+another hostname and probably don't need help by us.
+
+*** TODO How to setup ssh key authentication
+
+** Setup this repo
+
+We try to make everything as easy as possible for you, but need some runway here:
+
+- Clone this repository: git clone https://github.com/niklas/KubeHasSailed.git
+- Enter the new directory: cd KubeHasSailed
+- Initialize your config: ./bin/init
+- this will ask for your pibox host name. Enter the name that worked with above
+  ssh connection test.
+- at the end your should see some version outout
 
 ** Make services accessible again
 
@@ -51,13 +86,9 @@ We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloud
 - Create a tunnel
 - create an environment for that tunnel (cloudflared)
 - write that token down
-
-**** TODO Service setup
-
-- Clone this repository: git clone https://github.com/niklas/KubeHasSailed.git
-- Enter the new directory: cd KubeHasSailed
-- Initialize your config: ./bin/init
-- edit config/cloudflared.yaml and paste the the token from above proparation step, save
+- edit config/cloudflared.yaml and paste the the token from above, save it
+- in one terminal run: ./bin/ssh_pibox (this will forward the kubernetes admin connection)
+- in another terminal run: ./bin/create_tunnel
 
 **** Routes setup per service
 

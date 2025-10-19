@@ -2,6 +2,40 @@
 
 set -eu
 
+pibox_name_file="config/pibox_name"
+
 echo "Setting up..."
 
-cp -r --update=none config.example/ config/
+##############################
+# Pibox Name
+##############################
+if [ ! -f "${pibox_name_file}" ]; then
+    echo -n "What is the hostname of your pibox? "
+    read -r name
+
+    echo "storing the name '${name}' in ${pibox_name_file}"
+    echo $name > "${pibox_name_file}"
+fi
+
+pibox_hostname=$(cat config/pibox_name)
+
+echo "You pibox's hostname: ${pibox_hostname}"
+
+##############################
+# Resource Config
+##############################
+cp -r --update=none config.example/*.yaml config/
+
+##############################
+# Kubernetes Config
+##############################
+if [ ! -f config/k3s.yaml ]; then
+    echo "Copying k3s from pibox ${pibox_hostname}"
+    ssh "${pibox_hostname}" sudo cat /etc/rancher/k3s/k3s.yaml > config/k3s.yaml
+fi
+
+echo "Starting a test connection to your pibox..."
+(./bin/ssh_pibox sleep 10) &
+sleep 1
+
+./bin/check_k3s

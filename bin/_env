@@ -1,0 +1,5 @@
+
+export pibox_hostname=$(cat config/pibox_name)
+export KUBECONFIG="config/k3s.yaml"
+export KUBEPORT=6443
+export KUBEPORT_LOCAL=6443

@@ -4,4 +4,4 @@ set -eu
 
 echo "Creating tunnel..."
 
-helm install cloudflared ./charts/cloudflared --values=config/cloudflared.yaml "$@"
+./bin/helm install cloudflared ./charts/cloudflared --values=config/cloudflared.yaml "$@"

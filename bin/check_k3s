@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -eu
+
+echo "Testing kubctl... (version warnings can be ignored for now)"
+./bin/kubectl version
+
+echo "Testing helm (you should see some non-error output)"
+./bin/helm ls --all-namespaces

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+source ./bin/_env
+
+ssh -L ${KUBEPORT_LOCAL}:localhost:${KUBEPORT} ${pibox_hostname} "$@"
