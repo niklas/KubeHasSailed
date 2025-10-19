@@ -64,6 +64,15 @@ We try to make everything as easy as possible for you, but need some runway here
   ssh connection test.
 - at the end your should see some version outout
 
+** Disable kubesail-agent
+
+Since the uplink servers are not available anymore, the kubesail-agent is
+running in a loop, actually using up resources.
+
+You can stop it with: ./bin/disable_kubesail
+
+This won't delete anything, just set the number of pods to 0.
+
 ** Make services accessible again
 
 Kubesail provided a gateway that proxied public URLs to the services running on

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eu
+
+./bin/kubectl scale -n kubesail-agent --replicas=0 deployments/kubesail-agent
