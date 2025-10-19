@@ -4,4 +4,4 @@ set -eu
 
 echo "🙆 Removing cloudflare zero trust tunnel..."
 
-./bin/helm uninstall cloudflared --ignore-not-found "$@"
+./bin/helm uninstall cloudflared --ignore-not-found --wait "$@"

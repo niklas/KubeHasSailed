@@ -4,4 +4,4 @@ set -eu
 
 echo "🙆 Creating cloudflare zero trust tunnel..."
 
-./bin/helm install cloudflared ./charts/cloudflared --values=config/cloudflared.yaml "$@"
+./bin/helm install cloudflared ./charts/cloudflared --values=config/cloudflared.yaml --wait "$@"
