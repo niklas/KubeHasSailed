@@ -1,1 +1,5 @@
 tunnel_token: eyouPasteTheTokenHereThatYouGotFromCloudflareZeroTrustAfterCreatingATunnelEnvironment
+# Logs every request
+loglevel: debug
+# switch when everything is running well, then destroy and create tunnel again
+# loglevel: info

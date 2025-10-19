@@ -7,6 +7,6 @@ target="export/all.yaml"
 
 (./bin/ssh_pibox sleep 10) &
 sleep 1
-./bin/kubectl get po,deployment,rc,rs,ds,no,job,service -o yaml > "${target}"
+./bin/kubectl get all -o yaml > "${target}"
 
 echo "✔️ Current k3s from ${pibox_hostname} exported to ${target}"
