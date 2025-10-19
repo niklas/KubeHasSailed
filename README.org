@@ -54,6 +54,11 @@ We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloud
 
 **** TODO Service setup
 
+- Clone this repository: git clone https://github.com/niklas/KubeHasSailed.git
+- Enter the new directory: cd KubeHasSailed
+- Initialize your config: ./bin/init
+- edit config/cloudflared.yaml and paste the the token from above proparation step, save
+
 **** Routes setup per service
 
 For each service you want to publish, follow these steps:

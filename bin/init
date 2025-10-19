@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+echo "Setting up..."
+
+cp -r --update=none config.example/ config/
