@@ -74,6 +74,14 @@ You can stop it with: ./bin/disable_kubesail
 
 This won't delete anything, just set the number of pods to 0.
 
+** Export kubernetes plan
+
+To look up ports and other stuff quickly, you can export the current layout.
+
+Run: ./bin/export
+
+After that, you can look at export/all.yaml to find all your deployments, pods, services etc.
+
 ** Make services accessible again
 
 Kubesail provided a gateway that proxied public URLs to the services running on
