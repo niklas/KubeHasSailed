@@ -29,6 +29,7 @@ In this guide, we will use the following conventions to make it easier to read a
 - The user name of the kubesail account is "harald"
 - There is one cluster named "boxxy"
 - There is a service on this cluster named "hemlo"
+- The future top level domain of your services is myexample.com
 
 ** Setup access to your pibox
 
@@ -91,6 +92,7 @@ We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloud
 **** Preparation
 
 - Get a cloudflare account
+- Register one domain there (let's say myexample.com)
 - Log into [[https://one.dash.cloudflare.com/][Zero Trust]]
 - Create a tunnel
 - create an environment for that tunnel (cloudflared)
@@ -98,12 +100,27 @@ We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloud
 - edit config/cloudflared.yaml and paste the the token from above, save it
 - in one terminal run: ./bin/ssh_pibox (this will forward the kubernetes admin connection)
 - in another terminal run: ./bin/tunnel_create
+- a new connector should appear in your tunnel on the Zero Trust Tunnel page
+- you can debug your tunnel with: ./bin/tunnel_log
 
 **** Routes setup per service
 
-For each service you want to publish, follow these steps:
+For each service you want to publish, create a so called "published application
+route" in Cloudflare Zero Trust by follow these steps:
 
-- in the Zero Trust tunnel environment, create a route for your service (hemlo -> http://hemlo)
+- in the Zero Trust tunnel list, click the tunnel name, then "edit" in the sidebar
+- choose the tab "Published application routes"
+- fill in the following:
+  - Subdomain: hemlo
+  - Domain: choose your domain managed by cloudflare (myexample.com)
+  - leave path empty
+  - Service Type: HTTP
+  - URL: hemlo:8080 (you can find that port in the service resource, see export)
+  - Save. The first time it should say "DNS record created"
+- Check in the Cloudflare DNS management whether that "hemlo" CNAME record was created
+- when adding more services, Zero Trust does not always create new records, just
+  copy them from the first. They should point to "<tunnelid>.cfargotunnel.com"
+- After some minutes, you should be able to reach your service under https://hemlo.myexample.com
 
 **** Enhancements / Automations / Problems
 ***** TODO create the tunnel, environment, and route(s) automatically (REST API / terraform?)
