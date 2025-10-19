@@ -29,7 +29,7 @@ In this guide, we will use the following conventions to make it easier to read a
 - The user name of the kubesail account is "harald"
 - There is one cluster named "boxxy"
 - There is a service on this cluster named "hemlo"
-- The future top level domain of your services is myexample.com
+- The future top level domain of your services is "myexample.com"
 
 ** Setup access to your pibox
 
@@ -60,7 +60,10 @@ We try to make everything as easy as possible for you, but need some runway here
 
 - Clone this repository: git clone https://github.com/niklas/KubeHasSailed.git
 - Enter the new directory: cd KubeHasSailed
-- Initialize your config: ./bin/init
+- Initialize your config:
+#+begin_src bash
+  ./bin/init
+#+end_src
 - this will ask for your pibox host name. Enter the name that worked with above
   ssh connection test.
 - at the end your should see some version outout
@@ -70,7 +73,11 @@ We try to make everything as easy as possible for you, but need some runway here
 Since the uplink servers are not available anymore, the kubesail-agent is
 running in a loop, actually using up resources.
 
-You can stop it with: ./bin/disable_kubesail
+You can stop it with:
+
+#+begin_src bash
+  ./bin/disable_kubesail
+#+end_src
 
 This won't delete anything, just set the number of pods to 0.
 
@@ -78,7 +85,9 @@ This won't delete anything, just set the number of pods to 0.
 
 To look up ports and other stuff quickly, you can export the current layout.
 
-Run: ./bin/export
+#+begin_src bash
+  ./bin/export
+#+end_src
 
 After that, you can look at export/all.yaml to find all your deployments, pods, services etc.
 
@@ -106,10 +115,19 @@ We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloud
 - create an environment for that tunnel (cloudflared)
 - write that token down
 - edit config/cloudflared.yaml and paste the the token from above, save it
-- in one terminal run: ./bin/ssh_pibox (this will forward the kubernetes admin connection)
-- in another terminal run: ./bin/tunnel_create
+- in one terminal run this to forward the kubernetes admin connection
+#+begin_src bash
+  ./bin/ssh_pibox
+#+end_src
+- in another terminal run
+#+begin_src bash
+  ./bin/ssh_pibox
+#+end_src
 - a new connector should appear in your tunnel on the Zero Trust Tunnel page
-- you can debug your tunnel with: ./bin/tunnel_log
+- you can debug your tunnel with:
+#+begin_src bash
+  ./bin/tunnel_log
+#+end_src
 
 **** Routes setup per service
 
