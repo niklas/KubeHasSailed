@@ -1,0 +1,3 @@
+* KubeHasSailed
+
+The support for the pibox by kubesail.com has ended. Let's try to free our boxes without losing our data or services.
