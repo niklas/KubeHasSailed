@@ -1,3 +1,77 @@
 * KubeHasSailed
 
 The support for the pibox by kubesail.com has ended. Let's try to free our boxes without losing our data or services.
+
+** Preparation
+
+*** Assumed knowledge
+
+In order to follow this guide, it is assumed you know about the following stuff:
+
+- you can read (grats!)
+- basic knowledge of the command line on linux/unix
+- basic know-how on how kubernetes works (cluster, pods, deployments, nodes)
+- to run any code in this repo, you need basic knowledge of git
+
+
+*** Technical prerequisites
+
+In order to use code in this repo, you might have to install packages either locally or on your pibox.
+
+- SSH access to your pibox
+
+*** Conventions
+
+In this guide, we will use the following conventions to make it easier to read and follow:
+
+- The user name of the kubesail account is "harald"
+- There is one cluster named "boxxy"
+- There is a service on this cluster named "hemlo"
+
+
+** Make services accessible again
+
+Kubesail provided a gateway that proxied public URLs to the services running on
+your pibox, for example the public url https://hemlo.boxxy.harald.eu1.k8g8.com
+would securely forward traffic to the "hemlo" service in the "boxxy" cluster
+owned by the user "harald".
+
+Since this gateway was shut down, one cannot access this service anymore.
+
+*** Cloudflare Zero Trust
+
+Cloudflare offers a similar service, albeit not automatic.
+
+We will follow this [[https://sonarr.whispa.niklas.eu1.k8g8.com/][Guide by Cloudflare]].
+
+**** Preparation
+
+- Get a cloudflare account
+- Log into [[https://one.dash.cloudflare.com/][Zero Trust]]
+- Create a tunnel
+- create an environment for that tunnel (cloudflared)
+- write that token down
+
+**** TODO Service setup
+
+**** Routes setup per service
+
+For each service you want to publish, follow these steps:
+
+- in the Zero Trust tunnel environment, create a route for your service (hemlo -> http://hemlo)
+
+**** Enhancements / Automations / Problems
+***** TODO create the tunnel, environment, and route(s) automatically (REST API / terraform?)
+
+** Maintain services
+
+The pibox runs a kubernetes cluster of the k3s variety. All resources created
+through the KubeSail web interface can be savely inspected and exported through
+the kubectl command line interface.
+
+We will try to export the already setup resources and normalize them in a way
+they can be reused with other meta-kubernetes tools, for example helm.
+
+*** Problems
+**** TODO settings are visible, hardcoded into the resource descriptions
+**** TODO these settings might be actually secret (passwords, API keys etc)
